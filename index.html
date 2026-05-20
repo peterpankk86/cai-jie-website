@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CAI JIE 采杰時尚美學中心</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+    <style>
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        body { font-family: "Noto Serif TC", "Songti TC", "PMingLiU", serif; }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        const Menu = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>;
+        const X = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>;
+        const Check = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>;
+        const MapPin = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>;
+        const MessageCircle = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>;
+        const Clock = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>;
+        const ChevronRight = ({ size = 24, className = "" }) => <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"/></svg>;
+
+        const FloatingLineButton = () => (
+            <a href="https://lin.ee/unZsRgo" target="_blank" rel="noopener noreferrer" className="fixed bottom-6 right-6 z-[99] bg-[#06C755] text-white p-4 rounded-full shadow-lg hover:scale-105 transition-transform duration-300 flex items-center justify-center">
+                <MessageCircle size={24} />
+            </a>
+        );
+
+        const App = () => {
+          const [isScrolled, setIsScrolled] = useState(false);
+          const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+          const [selectedTreatment, setSelectedTreatment] = useState(null);
+          const [isBookingOpen, setIsBookingOpen] = useState(false);
+          const [isAboutOpen, setIsAboutOpen] = useState(false);
+          const [isClassMenuOpen, setIsClassMenuOpen] = useState(false);
+          const [isVipClassOpen, setIsVipClassOpen] = useState(false);
+          const [isTeamOpen, setIsTeamOpen] = useState(false);
+          const [isSpaceOpen, setIsSpaceOpen] = useState(false);
+
+          useEffect(() => {
+            const handleScroll = () => setIsScrolled(window.scrollY > 50);
+            window.addEventListener('scroll', handleScroll);
+            return () => window.removeEventListener('scroll', handleScroll);
+          }, []);
+
+          // 統一開啟彈窗後的處理
+          const openModal = (setter) => {
+             setIsMobileMenuOpen(false);
+             setter(true);
+          };
+
+          const navLinks = ['首頁', '關於我們', '療程介紹', '多堂方案', '專業團隊', '環境介紹'];
+          const treatments = [ /* ...內容不變... */
+            { title: '淨透毛孔\n管理療程', price: '$2,200', time: '80min', img: './class02A.png', desc: '針對粉刺、毛孔粗大、油脂堆積與肌膚悶塞問題，透過深層清潔與專業毛孔管理程序，幫助代謝老廢角質與多餘皮脂。讓肌膚恢復清爽潔淨，改善毛孔視覺感與膚觸粗糙問題。', targets: ['粉刺、閉鎖型粉刺困擾者', 'T字部位容易出油者', '毛孔粗大者', '容易長痘與膚況不乾淨者'] },
+            { title: '敏弱肌穩定\n修復療程', price: '$2,800', time: '80min', img: './class05A.png', desc: '針對泛紅、乾癢、敏弱不穩與肌膚屏障受損問題，採用溫和低刺激的修護保養程序，幫助舒緩肌膚不適與穩定膚況。降低外在刺激造成的不舒服感，讓肌膚恢復健康穩定狀態。', targets: ['敏感肌、泛紅肌膚者', '容易乾癢脫皮者', '換季膚況不穩者', '做完醫美後需修護者'] },
+            { title: '全方位肌膚\n管理療程', price: '$3,500', time: '100min', img: './class01A.png', desc: '針對肌膚乾燥、暗沉、粗糙、毛孔與保水度不足等問題，透過專業肌膚檢測與多層次保養程序，從清潔、代謝、修護到滋養一次完整調理。幫助肌膚恢復穩定、細緻與自然透亮感，打造健康且有光澤的肌膚狀態。', targets: ['初次做臉保養者', '肌膚狀況不穩定者', '想定期保養維持膚況者', '容易暗沉、缺水、粗糙者'] },
+            { title: '膠原增生\n水光療程', price: '$5,500', time: '90min', img: './class03A.png', desc: '透過水光儀器療程、高保濕導入與修護程序，幫助肌膚補充水分與維持彈潤光澤感。改善乾燥缺水、上妝不服貼與肌膚疲憊感，使肌膚呈現自然水亮與透嫩狀態。', targets: ['肌膚乾燥缺水者', '妝感容易浮粉卡粉者', '熬夜疲憊暗沉者', '想提升肌膚透亮感者'] },
+            { title: '淡斑修護\n亮膚療程', price: '$5,500', time: '100min', img: './class04A.png', desc: '針對肌膚斑點、暗沉不均與色素沉澱問題，透過專業修護程序與亮膚保養，幫助代謝老廢色素並提亮膚色。改善膚色不均與暗沉感，打造白皙、透亮且健康的肌膚光澤。', targets: ['有斑點、色素沉澱困擾者', '膚色暗沉不均者', '想提升肌膚亮白度者', '想要膚色均勻透亮者'] },
+            { title: 'V臉緊緻\n提拉賦活療程', price: '$5,500', time: '90min', img: './class06A.png', desc: '針對下顎線不明顯、臉部浮腫與輪廓鬆弛問題，透過專業輪廓管理與拉提程序，幫助修飾臉部線條與提升立體感。讓臉部視覺更加俐落緊緻，呈現自然精緻的小V輪廓。', targets: ['在意雙下巴與嘴邊肉者', '臉部容易浮腫者', '想讓輪廓更立體者', '想打造小臉視覺感者'] }
+          ];
+
+          const imgFilter = "saturate-[0.65] sepia-[0.2] contrast-[0.95] brightness-[0.95]";
+
+          return (
+            <div className="min-h-screen bg-[#FBF9F6] text-[#3A3530]">
+              <FloatingLineButton />
+
+              {/* 手機版選單 (Overlay) */}
+              {isMobileMenuOpen && (
+                <div className="fixed inset-0 z-[300] bg-[#FBF9F6] flex flex-col items-center justify-center space-y-8 animate-fade-in-up">
+                    <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 text-[#3A3530]"><X size={32}/></button>
+                    {navLinks.map((link) => (
+                        <button key={link} onClick={() => {
+                            if (link === '關於我們') openModal(setIsAboutOpen);
+                            else if (link === '療程介紹') openModal(setIsClassMenuOpen);
+                            else if (link === '多堂方案') openModal(setIsVipClassOpen);
+                            else if (link === '專業團隊') openModal(setIsTeamOpen);
+                            else if (link === '環境介紹') openModal(setIsSpaceOpen);
+                            else if (link === '首頁') { setIsMobileMenuOpen(false); window.scrollTo({top: 0, behavior: 'smooth'}); }
+                            else { setIsMobileMenuOpen(false); }
+                        }} className="text-2xl tracking-widest text-[#5C544D]">{link}</button>
+                    ))}
+                </div>
+              )}
+
+              {/* ...其他 Modal 彈窗程式碼保持不變... */}
+              {isAboutOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsAboutOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl rounded-sm"> <button onClick={() => setIsAboutOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./bland.png" alt="關於我們" className="w-full h-auto object-contain" /> </div> </div> )}
+              {isTeamOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsTeamOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"> <button onClick={() => setIsTeamOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./mom01.png" alt="專業團隊" className="w-full h-auto object-contain" /> </div> </div> )}
+              {isSpaceOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsSpaceOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"> <button onClick={() => setIsSpaceOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./space01.png" alt="環境介紹" className="w-full h-auto object-contain" /> </div> </div> )}
+              {isClassMenuOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsClassMenuOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"> <button onClick={() => setIsClassMenuOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./classmenu.png" alt="療程介紹" className="w-full h-auto object-contain" /> </div> </div> )}
+              {isVipClassOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsVipClassOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"> <button onClick={() => setIsVipClassOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./vipclass.png" alt="多堂方案" className="w-full h-auto object-contain" /> </div> </div> )}
+              {isBookingOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsBookingOpen(false)}></div> <div className="relative bg-[#FBF9F6] w-full max-w-sm p-8 rounded-sm shadow-2xl border border-[#E5E0D8]"> <button onClick={() => setIsBookingOpen(false)} className="absolute top-4 right-4 text-[#8A7B66]"><X size={20}/></button> <h3 className="text-xl tracking-widest mb-8 text-center text-[#3A3530]">立即預約諮詢</h3> <div className="space-y-4"> <a href="tel:0928772021" className="flex items-center space-x-4 p-4 border border-[#E5E0D8] hover:bg-[#EFECE5] transition-colors"> <MessageCircle size={24} className="text-[#8A7B66]"/> <div><p className="text-[12px] text-[#8C837A]">電話預約</p><p className="tracking-widest">0928-772-021</p></div> </a> <a href="https://lin.ee/unZsRgo" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-4 p-4 border border-[#E5E0D8] hover:bg-[#EFECE5] transition-colors"> <MessageCircle size={24} className="text-[#06C755]"/> <div><p className="text-[12px] text-[#8C837A]">官方 Line</p><p className="tracking-widest">點擊加入好友</p></div> </a> </div> </div> </div> )}
+              {selectedTreatment && ( <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 transition-opacity duration-300"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm cursor-pointer" onClick={() => setSelectedTreatment(null)}></div> <div className="relative bg-[#FBF9F6] w-full max-w-lg md:max-w-2xl rounded-sm shadow-2xl flex flex-col max-h-[90vh] overflow-hidden animate-fade-in-up"> <div className="bg-[#EFECE5] p-6 sm:p-8 flex items-center justify-center relative shrink-0 border-b border-[#E5E0D8]"> <button onClick={() => setSelectedTreatment(null)} className="absolute top-4 right-4 text-[#8A7B66] hover:text-[#3A3530] transition-colors bg-white/50 rounded-full p-1"><X size={20} /></button> <img src={selectedTreatment.img} alt={selectedTreatment.title} className={`w-28 h-28 md:w-36 md:h-36 object-contain drop-shadow-sm ${imgFilter}`} /> </div> <div className="p-6 sm:p-10 overflow-y-auto hide-scrollbar"> <h3 className="text-2xl md:text-3xl tracking-widest text-[#3A3530] mb-3">{selectedTreatment.title.replace('\n', '')}</h3> <div className="flex items-center space-x-4 text-[#8C837A] text-sm tracking-widest mb-6"> <span className="text-[#8A7B66] font-medium text-lg">{selectedTreatment.price}</span> <span>|</span> <span>{selectedTreatment.time}</span> </div> <div className="mb-8"> <p className="text-[#5C544D] leading-[2] tracking-wide text-[14px]">{selectedTreatment.desc}</p> </div> <div className="bg-white border border-[#E5E0D8] p-6 mb-8 shadow-sm"> <h4 className="text-[13px] tracking-[0.2em] text-[#8A7B66] mb-5 flex items-center font-bold"><Check size={16} className="mr-2" /> 適合對象</h4> <ul className="space-y-4"> {selectedTreatment.targets.map((target, idx) => ( <li key={idx} className="flex items-start text-[13.5px] tracking-widest text-[#5C544D]"> <span className="w-1.5 h-1.5 rounded-full bg-[#C5BDB5] mt-1.5 mr-3 shrink-0"></span> <span className="leading-relaxed">{target}</span> </li> ))} </ul> </div> <button className="w-full bg-[#8A7B66] text-white py-4 tracking-widest text-sm hover:bg-[#726553] transition-colors flex justify-center items-center space-x-2" onClick={() => { window.open('https://lin.ee/unZsRgo', '_blank'); }}> <MessageCircle size={16} /> <span>立即預約此療程</span> </button> </div> </div> </div> )}
+
+              <nav className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-[#FBF9F6]/95 backdrop-blur-sm shadow-sm py-2' : 'bg-transparent py-4'}`}>
+                <div className="max-w-[1400px] mx-auto px-6 lg:px-8 flex justify-between items-center">
+                  <div className="flex flex-col">
+                    <div className="flex items-baseline space-x-3">
+                      <span className="text-3xl font-normal tracking-widest text-[#3A3530]">CAI JIE</span>
+                      <span className="text-sm tracking-[0.12em] md:tracking-[0.2em] text-[#5C544D]">采杰時尚美學中心</span>
+                    </div>
+                    <span className="text-[10px] tracking-[0.25em] text-[#8C837A] mt-1">CAI JIE AESTHETIC CENTER</span>
+                  </div>
+                  <div className="hidden lg:flex items-center space-x-6 xl:space-x-8 text-[13px] tracking-widest text-[#5C544D]">
+                    {navLinks.map((link) => {
+                      if (link === '關於我們') return <button key={link} onClick={() => setIsAboutOpen(true)} className="hover:text-[#9C8F81] transition-colors">{link}</button>;
+                      if (link === '療程介紹') return <button key={link} onClick={() => setIsClassMenuOpen(true)} className="hover:text-[#9C8F81] transition-colors">{link}</button>;
+                      if (link === '多堂方案') return <button key={link} onClick={() => setIsVipClassOpen(true)} className="hover:text-[#9C8F81] transition-colors">{link}</button>;
+                      if (link === '專業團隊') return <button key={link} onClick={() => setIsTeamOpen(true)} className="hover:text-[#9C8F81] transition-colors">{link}</button>;
+                      if (link === '環境介紹') return <button key={link} onClick={() => setIsSpaceOpen(true)} className="hover:text-[#9C8F81] transition-colors">{link}</button>;
+                      return <a key={link} href="#" className="hover:text-[#9C8F81] transition-colors">{link}</a>
+                    })}
+                    <button onClick={() => setIsBookingOpen(true)} className="bg-[#8A7B66] text-white px-6 py-2 rounded-full hover:bg-[#726553] transition-colors flex items-center space-x-2">
+                      <MessageCircle size={14} /> <span>立即預約</span>
+                    </button>
+                  </div>
+                  <button className="lg:hidden text-[#3A3530]" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+                    {isMobileMenuOpen ? <X /> : <Menu />}
+                  </button>
+                </div>
+              </nav>
+
+              {/* ...其餘內容 (Hero, Brand Spirit, etc.) 保持不變... */}
+              <section className="relative w-full min-h-[620px] md:h-[85vh] flex flex-col md:flex-row pt-20 bg-[#EFECE5]">
+                <div className="w-full md:w-[45%] h-full flex flex-col justify-center px-5 sm:px-6 md:px-10 lg:px-20 z-10 relative">
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-light mb-4 tracking-widest text-[#3A3530]">CAI JIE</h1>
+                  <h2 className="text-2xl md:text-3xl font-medium mb-2 tracking-[0.2em] text-[#3A3530]">采杰時尚美學中心</h2>
+                  <p className="text-xs md:text-sm tracking-[0.3em] text-[#8C837A] mb-12 uppercase">Cai Jie Aesthetic Center</p>
+                  <div className="space-y-4 mb-10 text-lg tracking-[0.2em] text-[#3A3530]"> <p>身心療癒・放鬆環境・重塑自信</p> <p>專屬於妳的高級美學殿堂</p> </div>
+                  <button onClick={() => setIsBookingOpen(true)} className="bg-[#8A7B66] text-white px-8 py-3 flex items-center justify-between space-x-6 hover:bg-[#726553] transition-colors tracking-widest text-sm w-fit w-48"> <span>立即預約諮詢</span> <ChevronRight size={16} /> </button>
+                </div>
+                <div className="w-full md:w-[55%] h-full relative"> <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-[#EFECE5] to-transparent z-10 hidden md:block"></div> <img src="./room01.png" alt="Spa Interior" className={`w-full h-full object-cover ${imgFilter}`} /> </div>
+              </section>
+
+              <section className="py-16 md:py-24 bg-[#FBF9F6]"> <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"> <div className="flex flex-col md:flex-row gap-16 items-center"> <div className="w-full md:w-[45%]"> <div className="flex items-center space-x-4 mb-6"> <span className="text-sm tracking-[0.2em] text-[#5C544D]">品牌精神</span> <div className="h-[1px] bg-[#C5BDB5] w-12"></div> </div> <h2 className="text-3xl leading-snug tracking-widest mb-8 text-[#3A3530]">由內而外，喚醒最美的自己</h2> <div className="space-y-3 text-[#7A736B] leading-[2] tracking-widest text-[13px] mb-10"> <p>我們相信 ，真正的美，</p> <p>來自被細緻理解與溫柔照顧的每一刻。</p> <p>結合專業美容技術、頂級保養品牌與專業儀器設備，</p> <p>為每位女性量身打造專屬肌膚管理旅程。</p> </div> </div> <div className="w-full md:w-[55%] relative"> <img src="./003.png" alt="Brand Products" className={`w-full h-[380px] object-cover ${imgFilter}`} /> </div> </div> </div> </section>
+
+              <section className="py-20 bg-[#F2F0EB]"> <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8"> <div className="flex flex-col md:flex-row-reverse gap-16 items-center"> <div className="w-full md:w-[45%]"> <div className="flex items-center space-x-4 mb-6"> <span className="text-sm tracking-[0.2em] text-[#5C544D]">專業團隊</span> <div className="h-[1px] bg-[#C5BDB5] w-12"></div> </div> <h2 className="text-3xl leading-snug tracking-widest mb-6 text-[#3A3530]">直擊核心的醫美級修護</h2> <div className="space-y-3 text-[#7A736B] leading-[2] tracking-widest text-[13px] mb-8"> <p>「美容與保養不是盲目的瓶瓶罐罐，而是精準的用對成分。」</p> <p>擁有20年資深歷練的主理人 Flora，解決過各種問題肌膚，<br/>深刻了解各種膚況並且對症下藥。</p> <p>結合專業美容手法、頂級保養品牌、現代導入技術等醫美級修護概念。<br/>專為高端女性的抗老與受損需求，提供最高效率的膚況解答。</p> </div> <div className="bg-[#FBF9F6] p-5 border border-[#E5E0D8]"> <h3 className="font-medium tracking-widest mb-3 text-[14px] text-[#3A3530]">專業點評：醫美級保養 vs 一般做臉</h3> <div className="space-y-3 text-[12px] leading-relaxed tracking-wide text-[#7A736B]"> <p><span className="text-[#8A7B66] font-medium mr-1">優勢 (Pros):</span>採用高頻導入與頂級成分，直達真皮層刺激膠原。比起傳統單純去角質按摩，抗老與緊緻的「投資報酬率」極高。</p> <p><span className="text-[#8A7B66] font-medium mr-1">劣勢 (Cons):</span>單次療程費用較高。且高階修護後肌膚代謝加快，居家需嚴格執行防曬與高效保濕，對後續自我照顧要求較高。</p> </div> </div> </div> <div className="w-full md:w-[55%] relative flex justify-center md:justify-end mt-8 md:mt-0"> <div className="relative w-full max-w-[450px]"> <img src="./mom.png" alt="美容主理人 Flora" className={`w-full h-auto object-contain shadow-sm ${imgFilter}`} /> <div className="absolute -bottom-6 -left-2 md:-left-8 bg-[#FBF9F6] p-5 border border-[#E5E0D8] z-20 shadow-md"> <p className="text-lg tracking-widest text-[#3A3530]">美容主理人 Flora</p> <p className="text-[11px] tracking-widest text-[#8A7B66] mt-1">20年專業美容資歷</p> </div> </div> </div> </div> </div> </section>
+
+              <section className="py-24 bg-[#FBF9F6]"> <div className="text-center mb-16"> <h2 className="text-2xl md:text-3xl tracking-[0.2em] mb-4 text-[#3A3530]">專屬妳的客製化療程</h2> <p className="text-[#8C837A] tracking-[0.2em] text-[13px]">針對不同膚況與需求，量身打造最適合妳的美麗方案</p> </div> <div className="w-full overflow-x-auto pb-8 hide-scrollbar"> <div className="flex gap-4 px-4 lg:px-8 min-w-max mx-auto" style={{ width: "max-content" }}> {treatments.map((item, index) => ( <div key={index} className="bg-white border border-[#EBE6DF] w-[220px] sm:w-[240px] shrink-0 group hover:shadow-lg transition-shadow cursor-pointer" onClick={() => setSelectedTreatment(item)}> <div className="h-[200px] overflow-hidden bg-[#FBF9F6] flex items-center justify-center p-4"> <img src={item.img} alt={item.title.replace('\n', '')} className={`w-full h-full object-contain group-hover:scale-105 transition-transform duration-700 ${imgFilter}`} /> </div> <div className="p-6 text-center flex flex-col items-center"> <h3 className="text-[15px] tracking-[0.2em] mb-4 whitespace-pre-line leading-relaxed text-[#3A3530]"> {item.title} </h3> <div className="flex items-end justify-center space-x-1 mb-6 text-[#5C544D]"> <span className="text-lg tracking-wider">{item.price}</span> <span className="text-[10px] tracking-widest text-[#8C837A] mb-1">/ {item.time}</span> </div> <button className="border border-[#EBE6DF] text-[#5C544D] px-4 py-2 text-[11px] tracking-widest flex items-center justify-between w-full group-hover:border-[#8A7B66] group-hover:text-[#8A7B66] transition-colors" onClick={(e) => { e.stopPropagation(); setSelectedTreatment(item); }}> <span>了解更多</span> <ChevronRight size={12} /> </button> </div> </div> ))} </div> </div> </section>
+
+              <section className="bg-[#EFECE5] border-t border-[#E5E0D8] border-b"> <div className="flex flex-col lg:flex-row w-full h-auto lg:h-[450px]"> <div className="w-full lg:w-[40%] relative h-[220px] md:h-[300px] lg:h-full overflow-hidden bg-[#FBF9F6]"> <img src="./home02.png" alt="品牌四大特色" className={`absolute inset-0 w-full h-full object-contain object-center p-4 lg:p-8 ${imgFilter}`} /> </div> <div className="w-full lg:w-[35%] bg-[#FBF9F6] p-10 lg:p-14 flex flex-col justify-center"> <h2 className="text-2xl md:text-3xl tracking-[0.2em] mb-4 text-[#3A3530]">為何選擇 CAI JIE</h2> <p className="text-[13px] tracking-[0.3em] text-[#8C837A] mb-10">專業・安心・頂級・唯一</p> <ul className="space-y-4 mb-10 text-[13px] tracking-widest text-[#5C544D]"> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>嚴選頂級醫美品牌，效果與安全兼具</span> </li> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>專業美容師，超過20年資歷，經驗豐富</span> </li> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>極私密空間，採預約制，一對一專屬服務</span> </li> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>只接待女性，提供妳最放鬆自在的環境</span> </li> </ul> <button className="border border-[#C5BDB5] text-[#5C544D] px-6 py-2 flex items-center justify-center w-fit hover:bg-[#8A7B66] hover:text-white hover:border-[#8A7B66] transition-colors tracking-widest text-[12px]"> 了解更多優勢 </button> </div> <div className="w-full lg:w-[25%] h-[220px] md:h-[300px] lg:h-full"> <img src="./home03.png" alt="專業主理人合照" className={`w-full h-full object-cover ${imgFilter}`} /> </div> </div> </section>
+
+              <section className="flex w-full overflow-hidden h-48 sm:h-64 md:h-80 bg-[#FBF9F6]">
+                <img src="./home20.png" alt="療程實紀 1" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
+                <img src="./home30.png" alt="療程實紀 2" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
+                <img src="./home40.png" alt="療程實紀 3" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
+                <img src="./home50.png" alt="療程實紀 4" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
+                <img src="./home60.png" alt="療程實紀 5" className={`w-1/5 h-full object-cover object-center ${imgFilter}`} />
+              </section>
+
+              <footer className="bg-[#EFECE5] pt-12 pb-8 px-5 sm:px-6 border-t border-[#E5E0D8]">
+                <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row justify-between items-center lg:items-start mb-10 gap-8 lg:gap-0">
+                  <div className="text-center lg:text-left">
+                    <h2 className="text-2xl font-normal tracking-widest mb-1 text-[#3A3530]">CAI JIE</h2>
+                    <p className="text-[13px] tracking-[0.12em] md:tracking-[0.2em] text-[#5C544D]">采杰時尚美學中心</p>
+                    <p className="text-[9px] tracking-[0.25em] text-[#8C837A] mt-1">CAI JIE AESTHETIC CENTER</p>
+                  </div>
+                  <div className="flex flex-col md:flex-row gap-6 md:gap-12 lg:gap-20 text-[12px] text-[#5C544D] tracking-widest">
+                    <div className="flex items-start space-x-2"> <MapPin className="text-[#8A7B66] shrink-0 mt-0.5" size={16} /> <div> <p className="mb-1 text-[#3A3530]">地址</p> <p className="text-[#8C837A]">台南市北區文成三路968巷6號</p> </div> </div>
+                    <a href="https://lin.ee/unZsRgo" target="_blank" className="flex items-start space-x-2 hover:text-[#3A3530]"> <MessageCircle className="text-[#8A7B66] shrink-0 mt-0.5" size={16} /> <div> <p className="mb-1 text-[#3A3530]">官方 LINE</p> <p className="text-[#8C837A]">點擊加入好友</p> </div> </a>
+                    <div className="flex items-start space-x-2"> <Clock className="text-[#8A7B66] shrink-0 mt-0.5" size={16} /> <div> <p className="mb-1 text-[#3A3530]">營業時間</p> <p className="text-[#8C837A] leading-relaxed">週一至週六 11:00-21:00<br/>(採預約制，請於官方Line或來電預約)</p> </div> </div>
+                  </div>
+                  <button onClick={() => setIsBookingOpen(true)} className="bg-[#8A7B66] text-white px-8 py-3 flex items-center space-x-4 hover:bg-[#726553] transition-colors tracking-widest text-[12px]"> <span>立即預約諮詢</span> <div className="bg-white/20 rounded-full p-1"> <MessageCircle size={14} className="text-white"/> </div> </button>
+                </div>
+                <div className="text-center text-[10px] text-[#8C837A] tracking-widest border-t border-[#E5E0D8] pt-6"> © 2026 CAI JIE 采杰時尚美學中心 版權所有 </div>
+              </footer>
+            </div>
+          );
+        };
+
+        tailwind.config = { theme: { extend: { animation: { 'fade-in-up': 'fadeInUp 0.3s ease-out' }, keyframes: { fadeInUp: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } } } } }
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
