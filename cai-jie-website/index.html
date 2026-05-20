@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAI JIE 采杰時尚美學中心</title>
+    <title>采杰時尚美學中心</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
@@ -52,14 +52,13 @@
             return () => window.removeEventListener('scroll', handleScroll);
           }, []);
 
-          // 統一開啟彈窗後的處理
           const openModal = (setter) => {
              setIsMobileMenuOpen(false);
              setter(true);
           };
 
           const navLinks = ['首頁', '關於我們', '療程介紹', '多堂方案', '專業團隊', '環境介紹'];
-          const treatments = [ /* ...內容不變... */
+          const treatments = [ 
             { title: '淨透毛孔\n管理療程', price: '$2,200', time: '80min', img: './class02A.png', desc: '針對粉刺、毛孔粗大、油脂堆積與肌膚悶塞問題，透過深層清潔與專業毛孔管理程序，幫助代謝老廢角質與多餘皮脂。讓肌膚恢復清爽潔淨，改善毛孔視覺感與膚觸粗糙問題。', targets: ['粉刺、閉鎖型粉刺困擾者', 'T字部位容易出油者', '毛孔粗大者', '容易長痘與膚況不乾淨者'] },
             { title: '敏弱肌穩定\n修復療程', price: '$2,800', time: '80min', img: './class05A.png', desc: '針對泛紅、乾癢、敏弱不穩與肌膚屏障受損問題，採用溫和低刺激的修護保養程序，幫助舒緩肌膚不適與穩定膚況。降低外在刺激造成的不舒服感，讓肌膚恢復健康穩定狀態。', targets: ['敏感肌、泛紅肌膚者', '容易乾癢脫皮者', '換季膚況不穩者', '做完醫美後需修護者'] },
             { title: '全方位肌膚\n管理療程', price: '$3,500', time: '100min', img: './class01A.png', desc: '針對肌膚乾燥、暗沉、粗糙、毛孔與保水度不足等問題，透過專業肌膚檢測與多層次保養程序，從清潔、代謝、修護到滋養一次完整調理。幫助肌膚恢復穩定、細緻與自然透亮感，打造健康且有光澤的肌膚狀態。', targets: ['初次做臉保養者', '肌膚狀況不穩定者', '想定期保養維持膚況者', '容易暗沉、缺水、粗糙者'] },
@@ -92,7 +91,6 @@
                 </div>
               )}
 
-              {/* ...其他 Modal 彈窗程式碼保持不變... */}
               {isAboutOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsAboutOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl rounded-sm"> <button onClick={() => setIsAboutOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./bland.png" alt="關於我們" className="w-full h-auto object-contain" /> </div> </div> )}
               {isTeamOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsTeamOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"> <button onClick={() => setIsTeamOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./mom01.png" alt="專業團隊" className="w-full h-auto object-contain" /> </div> </div> )}
               {isSpaceOpen && ( <div className="fixed inset-0 z-[200] flex items-center justify-center p-4"> <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={() => setIsSpaceOpen(false)}></div> <div className="relative bg-white w-full max-w-2xl max-h-[90vh] overflow-y-auto shadow-2xl"> <button onClick={() => setIsSpaceOpen(false)} className="absolute top-4 right-4 z-10 bg-black/20 p-1 rounded-full text-white hover:bg-black/40"><X size={20}/></button> <img src="./space01.png" alt="環境介紹" className="w-full h-auto object-contain" /> </div> </div> )}
@@ -129,10 +127,9 @@
                 </div>
               </nav>
 
-              {/* ...其餘內容 (Hero, Brand Spirit, etc.) 保持不變... */}
               <section className="relative w-full min-h-[620px] md:h-[85vh] flex flex-col md:flex-row pt-20 bg-[#EFECE5]">
                 <div className="w-full md:w-[45%] h-full flex flex-col justify-center px-5 sm:px-6 md:px-10 lg:px-20 z-10 relative">
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-light mb-4 tracking-widest text-[#3A3530]">CAI JIE</h1>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-light mb-4 tracking-widest text-[#3A3530]"></h1>
                   <h2 className="text-2xl md:text-3xl font-medium mb-2 tracking-[0.2em] text-[#3A3530]">采杰時尚美學中心</h2>
                   <p className="text-xs md:text-sm tracking-[0.3em] text-[#8C837A] mb-12 uppercase">Cai Jie Aesthetic Center</p>
                   <div className="space-y-4 mb-10 text-lg tracking-[0.2em] text-[#3A3530]"> <p>身心療癒・放鬆環境・重塑自信</p> <p>專屬於妳的高級美學殿堂</p> </div>
@@ -149,7 +146,7 @@
 
               <section className="bg-[#EFECE5] border-t border-[#E5E0D8] border-b"> <div className="flex flex-col lg:flex-row w-full h-auto lg:h-[450px]"> <div className="w-full lg:w-[40%] relative h-[220px] md:h-[300px] lg:h-full overflow-hidden bg-[#FBF9F6]"> <img src="./home02.png" alt="品牌四大特色" className={`absolute inset-0 w-full h-full object-contain object-center p-4 lg:p-8 ${imgFilter}`} /> </div> <div className="w-full lg:w-[35%] bg-[#FBF9F6] p-10 lg:p-14 flex flex-col justify-center"> <h2 className="text-2xl md:text-3xl tracking-[0.2em] mb-4 text-[#3A3530]">為何選擇 CAI JIE</h2> <p className="text-[13px] tracking-[0.3em] text-[#8C837A] mb-10">專業・安心・頂級・唯一</p> <ul className="space-y-4 mb-10 text-[13px] tracking-widest text-[#5C544D]"> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>嚴選頂級醫美品牌，效果與安全兼具</span> </li> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>專業美容師，超過20年資歷，經驗豐富</span> </li> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>極私密空間，採預約制，一對一專屬服務</span> </li> <li className="flex items-center"> <Check size={16} className="text-[#8A7B66] mr-3 shrink-0" /> <span>只接待女性，提供妳最放鬆自在的環境</span> </li> </ul> <button className="border border-[#C5BDB5] text-[#5C544D] px-6 py-2 flex items-center justify-center w-fit hover:bg-[#8A7B66] hover:text-white hover:border-[#8A7B66] transition-colors tracking-widest text-[12px]"> 了解更多優勢 </button> </div> <div className="w-full lg:w-[25%] h-[220px] md:h-[300px] lg:h-full"> <img src="./home03.png" alt="專業主理人合照" className={`w-full h-full object-cover ${imgFilter}`} /> </div> </div> </section>
 
-              <section className="flex w-full overflow-hidden h-48 sm:h-64 md:h-80 bg-[#FBF9F6]">
+              <section className="flex w-full overflow-hidden h-32 sm:h-64 md:h-80 bg-[#FBF9F6]">
                 <img src="./home20.png" alt="療程實紀 1" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
                 <img src="./home30.png" alt="療程實紀 2" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
                 <img src="./home40.png" alt="療程實紀 3" className={`w-1/5 h-full object-cover object-center border-r border-white/50 ${imgFilter}`} />
